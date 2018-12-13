@@ -3,7 +3,7 @@
     "lang": "es",
     "name": "Calendar",
     "scope": "/gcalendar/",
-    "display": "browser",
+    "display": "standalone",
     "start_url": "index.html",
     "short_name": "Calendar",
     "theme_color": "transparent",
