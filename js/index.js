@@ -108,6 +108,7 @@ function insertEvent() {
     var summary = document.getElementById('summary').value;
     var startDate = document.getElementById('startDate').value;
     var endDate = document.getElementById('endDate').value;
+    var okIcon = document.getElementById('ok');
     console.log({summary});
    var eventGoogle = {
   'summary': summary,
@@ -144,6 +145,8 @@ function insertEvent() {
 
   request.execute(function(event) {
   appendPre('Event created: ' + event);
+  okIcon.removeAttribute('hidden');
+  setTimeout(()=>{okIcon.setAttribute('hidden','hidden')},2000);
   });
 }
 
