@@ -108,6 +108,7 @@ function listCalendar(){
     var request = gapi.client.calendar.calendarList.list();
       
         request.execute(function(event) {
+          console.log({event});
         appendPre('Event created: ' + event);
         event.result.items.forEach(element => {
             document.getElementById('calendarId').innerHTML += `<option value="${element.summary}">${element.summary}</option>`;
