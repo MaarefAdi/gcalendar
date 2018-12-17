@@ -5,5 +5,5 @@ self.addEventListener('install', function(e) {
 
 // Fetching content using Service Worker
 self.addEventListener('fetch', function(e) {
-    console.log('[Service Worker] Caching new resource: '+e.request.url);
+  //  console.log('[Service Worker] Caching new resource: '+e.request.url);
 });
