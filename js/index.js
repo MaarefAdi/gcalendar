@@ -106,7 +106,8 @@ function appendPre(message) {
  */
 function listCalendar(){
     var request = gapi.client.calendar.calendarList.list();
-      
+        let localDate = new Date();
+        localDate.setHours(localDate.getHours()+1);
         request.execute(function(event) {
           localStorage.listOfItems = JSON.stringify(event.result.items);
           appendPre('Event created: ' + event);
@@ -114,8 +115,8 @@ function listCalendar(){
               document.getElementById('calendarIndex').innerHTML += `<option value="${index}">${element.summary}</option>`;
           });
         });
-        document.getElementById('startDate').value = new Date().toISOString().slice(0,16);
-        document.getElementById('endDate').value = new Date().toISOString().slice(0,16);
+        document.getElementById('startDate').value = localDate.toISOString().slice(0,16);
+        document.getElementById('endDate').value = localDate.toISOString().slice(0,16);
 }
 function insertEvent() {
     event.preventDefault();
