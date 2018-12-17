@@ -112,7 +112,9 @@ function listCalendar(){
           localStorage.listOfItems = JSON.stringify(event.result.items);
           appendPre('Event created: ' + event);
           event.result.items.forEach((element,index) => {
-              document.getElementById('calendarIndex').innerHTML += `<option value="${index}">${element.summary}</option>`;
+              if((element.accessRole === 'owner') || (element.accessRole === 'writer') ){
+                document.getElementById('calendarIndex').innerHTML += `<option value="${index}">${element.summary}</option>`;
+              }
           });
         });
         document.getElementById('startDate').value = localDate.toISOString().slice(0,16);
