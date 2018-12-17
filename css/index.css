@@ -15,19 +15,31 @@ body{
 }
 form{
     position: absolute;
-    z-index: 14;
-    left: 31%;
-    top: 229px;
+    z-index: 20;    
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
 }
-#authorize_button{
-    position: absolute;
-    z-index: 12;
-    left: 45.5%;
-    top: 62%;
+form > div{
+    width: 450px;
 }
 #signout_button{
     position: absolute;
     z-index: 12;
     right: 15px;
     top: 11px;
+}
+.authorize-btn-container{
+    display: grid;
+    position: absolute;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    justify-items: center;
+    align-items: center;
+}
+.d-grid{
+    display: grid;
 }
