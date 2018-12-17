@@ -111,7 +111,7 @@ function listCalendar(){
           localStorage.listOfItems = JSON.stringify(event.result.items);
           appendPre('Event created: ' + event);
           event.result.items.forEach((element,index) => {
-              document.getElementById('calendarId').innerHTML += `<option value="${index}">${element.summary}</option>`;
+              document.getElementById('calendarIndex').innerHTML += `<option value="${index}">${element.summary}</option>`;
           });
         });
         document.getElementById('startDate').value = new Date().toISOString().slice(0,16);
