@@ -108,58 +108,61 @@ function listCalendar(){
     var request = gapi.client.calendar.calendarList.list();
       
         request.execute(function(event) {
-          console.log({event});
-        appendPre('Event created: ' + event);
-        event.result.items.forEach(element => {
-            document.getElementById('calendarId').innerHTML += `<option value="${element.summary}">${element.summary}</option>`;
+          localStorage.listOfItems = JSON.stringify(event.result.items);
+          appendPre('Event created: ' + event);
+          event.result.items.forEach((element,index) => {
+              document.getElementById('calendarId').innerHTML += `<option value="${index}">${element.summary}</option>`;
+          });
         });
-        });
+        document.getElementById('startDate').value = new Date().toISOString().slice(0,16);
+        document.getElementById('enDate').value = new Date().toISOString().slice(0,16);
 }
 function insertEvent() {
     event.preventDefault();
-    var calendarId = document.getElementById('calendarId').value;
-    var summary = document.getElementById('summary').value;
-    var startDate = document.getElementById('startDate').value;
-    var endDate = document.getElementById('endDate').value;
-    var okIcon = document.getElementById('ok');
-    console.log({summary});
-   var eventGoogle = {
-  'summary': summary,
-  //'location': '800 Howard St., San Francisco, CA 94103',
-  //'description': 'A chance to hear more about Google\'s developer products.',
-  'start': {
-  'dateTime': startDate+':01+01:00',
-  'timeZone': 'Africa/Tunis'
-  },
-  'end': {
-  'dateTime': endDate+':00+01:00',
-  'timeZone': 'Africa/Tunis'
-   },
-  'recurrence': [
-      'RRULE:FREQ=DAILY;COUNT=2'
-  ],/*
-  'attendees': [
-      {'email': 'lpage@example.com'},
-      {'email': 'sbrin@example.com'}
-  ],*/
-  'reminders': {
-      'useDefault': false,
-      'overrides': [
-      {'method': 'email', 'minutes': 24 * 60},
-      {'method': 'popup', 'minutes': 10}
-      ]
-  }
-  };
+    let calendarIndex = document.getElementById('calendarIndex').value;
+    let summary = document.getElementById('summary').value;
+    let startDate = document.getElementById('startDate').value;
+    let endDate = document.getElementById('endDate').value;
+    let okIcon = document.getElementById('ok');
+    let listOfItems = JSON.parse(localStorage.listOfItems);
+    let calendarId = listOfItems[calendarIndex].id;
+    let eventGoogle = {
+    'summary': summary,
+    //'location': '800 Howard St., San Francisco, CA 94103',
+    //'description': 'A chance to hear more about Google\'s developer products.',
+    'start': {
+    'dateTime': startDate+':01+01:00',
+    'timeZone': 'Africa/Tunis'
+    },
+    'end': {
+    'dateTime': endDate+':01+01:00',
+    'timeZone': 'Africa/Tunis'
+    },
+    /*'recurrence': [
+        'RRULE:FREQ=DAILY;COUNT=2'
+    ],
+    'attendees': [
+        {'email': 'lpage@example.com'},
+        {'email': 'sbrin@example.com'}
+    ],*/
+    'reminders': {
+        'useDefault': false,
+        'overrides': [
+        {'method': 'email', 'minutes': 24 * 60},
+        {'method': 'popup', 'minutes': 10}
+        ]
+    }
+    };
 
-  var request = gapi.client.calendar.events.insert({
-  'calendarId': calendarId,
-  'resource': eventGoogle
-  });
+    var request = gapi.client.calendar.events.insert({
+    'calendarId': calendarId,
+    'resource': eventGoogle
+    });
 
-  request.execute(function(event) {
-  appendPre('Event created: ' + event);
-  okIcon.removeAttribute('hidden');
-  setTimeout(()=>{okIcon.setAttribute('hidden','hidden')},2000);
-  });
+    request.execute(function(event) {
+    appendPre('Event created: ' + event);
+    okIcon.removeAttribute('hidden');
+    setTimeout(()=>{okIcon.setAttribute('hidden','hidden')},2000);
+    });
 }
 
