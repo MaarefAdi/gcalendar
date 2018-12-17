@@ -115,7 +115,7 @@ function listCalendar(){
           });
         });
         document.getElementById('startDate').value = new Date().toISOString().slice(0,16);
-        document.getElementById('enDate').value = new Date().toISOString().slice(0,16);
+        document.getElementById('endDate').value = new Date().toISOString().slice(0,16);
 }
 function insertEvent() {
     event.preventDefault();
