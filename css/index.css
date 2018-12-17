@@ -43,5 +43,25 @@ form > div{
     display: grid;
 }
 .justify-items-center{
-    justify-items: center
+    justify-items: center;
 }
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+    .bg{
+        height: 100%;
+    }
+    .bgImg{
+        top: 23%;
+    }
+    form{
+        top: 40%;
+        padding: 0 25px;
+    }
+    form > div{
+        width: 100%;
+    }
+    .row{
+     margin-right: 0px;
+     margin-left: 0px; 
+    }
+ }
